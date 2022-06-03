@@ -8,6 +8,12 @@ const CHECKBOX_VALUES = {
   import: false
 }
 
+const SELECT_VALUES = {
+  alpha: false,
+  date: false,
+  import: false
+}
+
 const HomePage = (function() {
   function renderTask(task){
     return `
@@ -46,10 +52,10 @@ const HomePage = (function() {
         <p>Sort</p>
         <div class="js-sortBy">
           <select name="sortBy" id="sortBy">
-            <option value="" disabled selected>Select your option</option>
-            <option value="alpha">Alphabetical (a-z)</option>
-            <option value="date">Due date</option>
-            <option value="import">Importance</option>
+            <option value="" disabled ${SELECT_VALUES.alpha || SELECT_VALUES.date || SELECT_VALUES.import ? '' : 'selected'}>Select your option</option>
+            <option value="alpha" ${SELECT_VALUES.alpha ? 'selected' : ''}>Alphabetical (a-z)</option>
+            <option value="date" ${SELECT_VALUES.date ? 'selected' : ''}>Due date</option>
+            <option value="import" ${SELECT_VALUES.import ? 'selected' : ''}>Importance</option>
           </select>
         </div>
       </section>
@@ -75,14 +81,13 @@ const HomePage = (function() {
 
     Logout.addEventListener("click", async (event) => {
       event.preventDefault();
-
-    try {
-      await logout()
-      DOMHandler.load(LoginPage);
-    } catch (error){
-      console.log(error.message);
-    }
-    })
+      try {
+        await logout()
+        DOMHandler.load(LoginPage);
+      } catch (error){
+        console.log(error.message);
+      }
+      })
   }
 
   function listenSortBy() {
@@ -93,14 +98,23 @@ const HomePage = (function() {
         switch (event.target.value) {
           case "alpha":
             console.log("alpha")
+            SELECT_VALUES.alpha = true
+            SELECT_VALUES.date = false
+            SELECT_VALUES.import = false
             STORE.tasks.sort( (a,b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
             break;
           case "date":
             console.log("date")
+            SELECT_VALUES.alpha = false
+            SELECT_VALUES.date = true
+            SELECT_VALUES.import = false
             STORE.tasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
             break;
           case "import":
             console.log("import")
+            SELECT_VALUES.alpha = false
+            SELECT_VALUES.date = false
+            SELECT_VALUES.import = true
             STORE.tasks.sort((a, b) => Number(b.important) - Number(a.important))
             break;
         }
