@@ -73,18 +73,21 @@ const HomePage = (function() {
     const sortBy =  document.getElementById('sortBy')
   
     sortBy.addEventListener("change", async (event) => {
-      console.log(STORE.tasks)
       try {
-        
-        if(event.target.value == "alpha"){
-          console.log("alpha")
-          STORE.tasks.sort( (a,b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
-        }else if(event.target.value == "date"){
-          console.log("date")
-          STORE.tasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
-          console.log(STORE.tasks)
+        switch (event.target.value) {
+          case "alpha":
+            console.log("alpha")
+            STORE.tasks.sort( (a,b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
+            break;
+          case "date":
+            console.log("date")
+            STORE.tasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
+            break;
+          case "import":
+            console.log("import")
+            STORE.tasks.sort((a, b) => Number(b.important) - Number(a.important))
+            break;
         }
-
         DOMHandler.reload()
       } catch (error) {
         DOMHandler.reload()
