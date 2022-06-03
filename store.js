@@ -7,7 +7,8 @@ async function fetchTasks() {
 
 const STORE = {
   tasks: [],
-  fetchTasks,
+  filtered: [],
+  fetchTasks
 };
 
 export default STORE;
