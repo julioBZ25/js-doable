@@ -7,3 +7,8 @@ export async function login(credentials = { email, password }) {
 
   sessionStorage.setItem(tokenKey, JSON.stringify(token.token))
 }
+
+export async function logout() {
+  await apiFetch("logout", { method: "DELETE" })
+  sessionStorage.removeItem(tokenKey)
+}

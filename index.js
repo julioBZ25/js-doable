@@ -9,9 +9,6 @@ async function init() {
     const token = sessionStorage.getItem("tokenKey")
   
     if(!token) throw new Error()
-  
-    // const user = await getUser()
-    // STORE.user = user
 
     // console.log("aqui estoy")
     await STORE.fetchTasks();
