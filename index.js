@@ -7,10 +7,9 @@ import LoginPage from "./Login-page.js";
 async function init() {
   try{
     const token = sessionStorage.getItem("tokenKey")
-  
+
     if(!token) throw new Error()
 
-    // console.log("aqui estoy")
     await STORE.fetchTasks();
     DOMHandler.load(HomePage)
   } catch(error) {
