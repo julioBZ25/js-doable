@@ -7,7 +7,6 @@ const DOMHandler = (function (parentSelector) {
     module: null,
     load(module) {
       this.module = module;
-      // console.log(module.toString)
       parent.innerHTML = module;
       module.addListeners();
     },
