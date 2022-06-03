@@ -8,11 +8,19 @@ const CHECKBOX_VALUES = {
   import: false
 }
 
-const SELECT_VALUES = {
-  alpha: false,
-  date: false,
-  import: false
+const SORT_BY_HANDLER = {
+  alpha: {
+    comparator: (a,b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()),
+  },
+  date: {
+    comparator: (a, b) => new Date(a.due_date) - new Date(b.due_date),
+  },
+  import: {
+    comparator: (a, b) => Number(b.important) - Number(a.important),
+  },
 }
+
+let SELECTED_VALUE = ''
 
 const HomePage = (function() {
   function renderTask(task){
@@ -52,10 +60,10 @@ const HomePage = (function() {
         <p>Sort</p>
         <div class="js-sortBy">
           <select name="sortBy" id="sortBy">
-            <option value="" disabled ${SELECT_VALUES.alpha || SELECT_VALUES.date || SELECT_VALUES.import ? '' : 'selected'}>Select your option</option>
-            <option value="alpha" ${SELECT_VALUES.alpha ? 'selected' : ''}>Alphabetical (a-z)</option>
-            <option value="date" ${SELECT_VALUES.date ? 'selected' : ''}>Due date</option>
-            <option value="import" ${SELECT_VALUES.import ? 'selected' : ''}>Importance</option>
+            <option value="" disabled ${SELECTED_VALUE ? '' : 'selected'}>Select your option</option>
+            <option value="alpha" ${SELECTED_VALUE === 'alpha' ? 'selected' : ''}>Alphabetical (a-z)</option>
+            <option value="date" ${SELECTED_VALUE === 'date'  ? 'selected' : ''}>Due date</option>
+            <option value="import" ${SELECTED_VALUE === 'import'  ? 'selected' : ''}>Importance</option>
           </select>
         </div>
       </section>
@@ -93,31 +101,11 @@ const HomePage = (function() {
   function listenSortBy() {
     const sortBy =  document.getElementById('sortBy')
   
-    sortBy.addEventListener("change", async (event) => {
+    sortBy.addEventListener("change", (event) => {
       try {
-        switch (event.target.value) {
-          case "alpha":
-            console.log("alpha")
-            SELECT_VALUES.alpha = true
-            SELECT_VALUES.date = false
-            SELECT_VALUES.import = false
-            STORE.tasks.sort( (a,b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
-            break;
-          case "date":
-            console.log("date")
-            SELECT_VALUES.alpha = false
-            SELECT_VALUES.date = true
-            SELECT_VALUES.import = false
-            STORE.tasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
-            break;
-          case "import":
-            console.log("import")
-            SELECT_VALUES.alpha = false
-            SELECT_VALUES.date = false
-            SELECT_VALUES.import = true
-            STORE.tasks.sort((a, b) => Number(b.important) - Number(a.important))
-            break;
-        }
+        const handler = SORT_BY_HANDLER[event.target.value]
+        SELECTED_VALUE = event.target.value
+        STORE.tasks.sort(handler.comparator)
         DOMHandler.reload()
       } catch (error) {
         DOMHandler.reload()
