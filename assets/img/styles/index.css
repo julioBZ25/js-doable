@@ -18,3 +18,7 @@ ul{
   padding: 1rem;
   align-items: center;
 }
+
+.js-important-button{
+  cursor: pointer;
+}

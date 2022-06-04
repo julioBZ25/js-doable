@@ -6,7 +6,6 @@ import STORE from "./store.js";
 
 
 function render() {
-  // const { loginError } = this.state;
   const { loginError } = LoginPage.state;
   return `
       <section class="container">
@@ -65,11 +64,9 @@ function listenSubmitForm() {
 
 const LoginPage = {
   toString() {
-    // return render.call(this)
     return render()
   },
   addListeners() {
-    // listenSubmitForm.call(this)
     return listenSubmitForm()
   },
   state: {
