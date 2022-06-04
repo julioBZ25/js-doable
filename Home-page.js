@@ -23,6 +23,12 @@ const SORT_BY_HANDLER = {
   },
 }
 
+const IMPORTANT_COLORS = {
+  important: '#EC4899',
+  nonImportant: '#D1D5DB',
+  completed: '#F9A8D4',
+}
+
 let SELECTED_VALUE = ''
 
 const HomePage = (function() {
@@ -30,17 +36,19 @@ const HomePage = (function() {
     return `
     <li class= "task-card">
       ${
-        task.completed ? `<input type='checkbox' id='completedTask' data-id=${task.id} checked>` : `<input type='checkbox' data-id=${task.id} id='completedTask'>`
+        task.completed ? `<input type='checkbox' class='completedTask' data-id=${task.id} checked>` : `<input type='checkbox' data-id=${task.id} class='completedTask'>`
       }
-      <div>${task.completed}</div>
       <div>
         <div>
           ${task.title}
         </div>
         ${task.due_date ? `<div>${task.due_date}</div>` : ''}
       </div>
-      <div>
-        ${task.important ? `<input type='checkbox' id='importantTask' checked>` : `<input type='checkbox' id='importantTask'>`}
+      <div class="js-important-button" data-id=${task.id} data-import=${task.important}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM9 12C9 12.5523 8.55229 13 8 13C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11C8.55229 11 9 11.4477 9 12ZM8 3C7.44772 3 7 3.44772 7 4V8C7 8.55228 7.44772 9 8 9C8.55229 9 9 8.55228 9 8V4C9 3.44772 8.55229 3 8 3Z" 
+          fill=${task.important ? (task.completed ? IMPORTANT_COLORS.completed : IMPORTANT_COLORS.important) : IMPORTANT_COLORS.nonImportant} />
+        </svg>
       </div>
     </li>`
   }
@@ -109,16 +117,36 @@ const HomePage = (function() {
   }
 
   function listenCompletedTask(){
-    const completedCheckbox = document.querySelector('#completedTask')
+    const completedCheckbox = document.querySelectorAll('.completedTask')
+    
+    completedCheckbox.forEach(element => {
+      element.addEventListener('change', async (event) => {
+        event.preventDefault()
+  
+        const {checked, dataset: {id}} = event.target
+  
+        await updateTask(id, { completed: checked })
+        const task = STORE.tasks.find(a => a.id.toString() === id)
+        task.completed = checked
+        DOMHandler.reload()
+      })
+    })
+  }
 
-    completedCheckbox.addEventListener('change', async (event) => {
-      event.preventDefault()
+  function listenImportantTask(){
+    const importantTask = document.querySelectorAll(".js-important-button")
 
-      const {checked, dataset: {id}} = event.target
+    importantTask.forEach(element => {
+      element.addEventListener("click", async function(){
 
-      await updateTask(id, { completed: checked })
-      const task = STORE.tasks.find(a => a.id.toString() === id)
-      task.completed = checked
+        // console.log(event)
+        const {dataset: {id, important}} = this
+
+        await updateTask(id, { important: !(important === 'true')})
+        const task = STORE.tasks.find(a => a.id.toString() === id)
+        task.important = !(important === 'true')
+        DOMHandler.reload()
+      })
     })
   }
 
@@ -226,6 +254,7 @@ const HomePage = (function() {
       listenShowBy()
       listenSubmitTask()
       listenCompletedTask()
+      listenImportantTask()
     }
   }
 })()
