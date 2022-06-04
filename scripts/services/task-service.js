@@ -1,5 +1,5 @@
-import apiFetch from "./api-fetch.js";
-import STORE from "./store.js";
+import apiFetch from "../api-fetch.js";
+import STORE from "../store.js";
 
 export function getTasks() {
   return apiFetch("tasks")

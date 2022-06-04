@@ -1,8 +1,8 @@
-import { input } from "./input.js";
-import { signup } from "./Login-service.js"
-import DOMHandler from "./DOM.js";
 import HomePage from "./Home-page.js"
 import LoginPage from "./Login-page.js";
+import { input } from "../utils/input.js";
+import { signup } from "../services/auth-services.js";
+import DOMHandler from "../utils/DOM.js";
 
 function render() {
   const { signUpError } = signUpPage.state;

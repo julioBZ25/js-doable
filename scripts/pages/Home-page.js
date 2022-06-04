@@ -1,10 +1,9 @@
-import DOMHandler from "./DOM.js";
-import { input } from "./input.js";
+import DOMHandler from "../utils/DOM.js";
+import { input } from "../utils/input.js";
 import LoginPage from "./Login-page.js";
-import { logout } from "./Login-service.js";
-import STORE from "./store.js";
-import { createTask, updateTask } from "./task-service.js";
-
+import STORE from "../store.js";
+import { logout } from "../services/auth-services.js";
+import {createTask, updateTask} from "../services/task-service.js"
 
 const CHECKBOX_VALUES = {
   pending: false,

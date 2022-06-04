@@ -1,8 +1,8 @@
-import { input } from "./input.js";
-import { login } from "./Login-service.js"
-import DOMHandler from "./DOM.js";
+import { input } from "../utils/input.js";
+import { login } from "../services/auth-services.js"
+import DOMHandler from "../utils/DOM.js";
 import HomePage from "./Home-page.js"
-import STORE from "./store.js";
+import STORE from "../store.js";
 import signUpPage from "./CreateUser-page.js";
 
 function render() {

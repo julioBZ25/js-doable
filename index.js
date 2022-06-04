@@ -1,8 +1,8 @@
-import DOMHandler from "./DOM.js";
-import { tokenKey } from "./config.js";
-import STORE from "./store.js";
-import HomePage from "./Home-page.js"
-import LoginPage from "./Login-page.js";
+import DOMHandler from "./scripts/utils/DOM.js";
+import { tokenKey } from "./scripts/utils/config.js";
+import LoginPage from "./scripts/pages/Login-page.js";
+import HomePage from "./scripts/pages/Home-page.js";
+import STORE from "./scripts/store.js";
 
 async function init() {
   try{

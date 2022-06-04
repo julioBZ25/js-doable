@@ -1,4 +1,4 @@
-import { getTasks } from "./task-service.js"
+import { getTasks } from "./services/task-service.js"
 
 async function fetchTasks() {
   const tasks = await getTasks()
