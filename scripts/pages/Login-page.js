@@ -9,8 +9,8 @@ function render() {
   const { loginError } = LoginPage.state;
   return `
       <section class="container">
-        <h1 class="heading heading--lg text-center mb-4">Login</h1>
-        <form class="flex flex-column gap-4 mb-4 js-login-form">
+        <h1 class="">Login</h1>
+        <form class="js-login-form">
           ${input({
             label: "email",
             id: "email",
@@ -32,7 +32,9 @@ function render() {
           }
           <button class="button button--primary">Login</button>
         </form>
-        <a href="#" class="block text-center js-signup-link">Create account</a>
+        <div class="signup-link-container">
+          <a href="#" class="block text-center js-signup-link">Create account</a>
+        </div>
       </section>
   `;
 }

@@ -2,7 +2,7 @@ export function input({label, id, name, type, placeholder = "", required = false
   return `
   <div class="input">
     ${ label ?
-      `<label for="${id}" class="content-xs overline" >${label}</label>`
+      `<label for="${id}" class="label" >${label}</label>`
       : ""
     }
     <div class="input__container">

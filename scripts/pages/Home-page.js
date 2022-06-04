@@ -34,17 +34,17 @@ const HomePage = (function() {
   function renderTask(task){
     return `
     <li class= "task-card">
-      ${
-        task.completed ? `<input type='checkbox' class='completedTask' data-id=${task.id} checked>` : `<input type='checkbox' data-id=${task.id} class='completedTask'>`
-      }
-      <div>
+      <div class="task-content">
+        ${
+          task.completed ? `<input type='checkbox' class='completedTask' data-id=${task.id} checked>` : `<input type='checkbox' data-id=${task.id} class='completedTask'>`
+        }
         <div>
           ${task.title}
+          ${task.due_date ? `<div>${task.due_date}</div>` : ''}
         </div>
-        ${task.due_date ? `<div>${task.due_date}</div>` : ''}
       </div>
       <div class="js-important-button" data-id=${task.id} data-import=${task.important}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM9 12C9 12.5523 8.55229 13 8 13C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11C8.55229 11 9 11.4477 9 12ZM8 3C7.44772 3 7 3.44772 7 4V8C7 8.55228 7.44772 9 8 9C8.55229 9 9 8.55228 9 8V4C9 3.44772 8.55229 3 8 3Z" 
           fill=${task.important ? (task.completed ? IMPORTANT_COLORS.completed : IMPORTANT_COLORS.important) : IMPORTANT_COLORS.nonImportant} />
         </svg>
@@ -67,7 +67,7 @@ const HomePage = (function() {
         </div>
       </header>
       <section class="sort-section">
-        <p>Sort</p>
+        <p class="title-sort">Sort</p>
         <div class="js-sortBy">
           <select name="sortBy" id="sortBy">
             <option value="" disabled ${SELECTED_VALUE ? '' : 'selected'}>Select your option</option>
@@ -78,12 +78,16 @@ const HomePage = (function() {
         </div>
       </section>
       <section class="show-section">
-        <p>Show</p>
-        <div class="js-showBy">        
-          <input type="checkbox" id="pending" name="pending" value="pending" ${CHECKBOX_VALUES.pending ? 'checked' : ''}>
-          <label for="pending">Only pending</label>
-          <input type="checkbox" id="import" name="import" value="import" ${CHECKBOX_VALUES.import ? 'checked' : ''}>
-          <label for="import">Only important</label>
+        <p class="title-show">Show</p>
+        <div class="js-showBy">
+          <div class="showPending">       
+            <input type="checkbox" id="pending" name="pending" value="pending" ${CHECKBOX_VALUES.pending ? 'checked' : ''}>
+            <label for="pending">Only pending</label>
+          </div>
+          <div class="showImportant">
+            <input type="checkbox" id="import" name="import" value="import" ${CHECKBOX_VALUES.import ? 'checked' : ''}>
+            <label for="import">Only important</label>
+          </div>
         </div>
       </section>
       <section class="tasks-section">

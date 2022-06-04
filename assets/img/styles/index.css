@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body{
+  font-family: 'Inter';
+  margin: 0;
+}
+
 ul{
   list-style-type: none;
   display: flex;
@@ -7,13 +14,6 @@ ul{
   margin: 0;
 }
 
-.task-card{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid black;
-}
-
 .tasks-section{
   padding: 1rem;
   align-items: center;
@@ -21,4 +21,119 @@ ul{
 
 .js-important-button{
   cursor: pointer;
+}
+
+.js-login-form{
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input__container{
+  display: flex;
+}
+
+.input__content{
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid black;
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label{
+  font-weight: 400;
+}
+
+.js-signup-link{
+  text-decoration: none;
+  color: black;
+}
+
+.signup-link-container{
+  text-align: center;
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #E5E7EB;
+  padding: 7px 0;
+}
+
+.logout{
+  position: absolute;
+  right: 18px;
+}
+
+.show-section,
+.sort-section{
+  display: flex;
+  flex-direction: row;
+  padding: 18px;
+  align-items: center;
+}
+
+.title-show,
+.title-sort{
+  margin: 0;
+  padding: 0.25rem;
+}
+
+
+.js-sortBy{
+  display: flex;
+  margin-left: 47px;
+  align-items: center;
+  width: 100%;
+}
+
+.js-showBy{
+  display: flex;
+  margin-left: 47px;
+  align-items: center;
+  gap: 1rem;
+}
+.js-showBy label{
+  font-size: small;
+}
+
+#sortBy{
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.task-card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.task-content{
+  display: flex;
+  gap: 0.75rem;
+}
+
+.task-card input{
+  width: 1rem;
+  height: 1rem;
+}
+
+input[type="checkbox"]{
+  background-color:#EC4899;
+}
+
+.js-important-button{
+  width: 1rem;
+  height: 1rem;
 }
