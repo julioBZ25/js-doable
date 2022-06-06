@@ -4,12 +4,16 @@ import DOMHandler from "../utils/DOM.js";
 import HomePage from "./Home-page.js"
 import STORE from "../store.js";
 import signUpPage from "./CreateUser-page.js";
+import { Header } from "./header.js";
 
 function render() {
   const { loginError } = LoginPage.state;
   return `
+      ${Header}
       <section class="container">
-        <h1 class="">Login</h1>
+        <div class="login-title">
+          <h1 class="">Login</h1>
+        </div>
         <form class="js-login-form">
           ${input({
             label: "email",
@@ -30,10 +34,12 @@ function render() {
           ${loginError ? 
             `<p class="text-center error-300">${loginError}</p>`: ''
           }
-          <button class="button button--primary">Login</button>
+          <div class="login-button-container">
+            <button class="js-login-button">Login</button>
+          </div>
         </form>
         <div class="signup-link-container">
-          <a href="#" class="block text-center js-signup-link">Create account</a>
+          <a href="#" class="js-signup-link">Create account</a>
         </div>
       </section>
   `;

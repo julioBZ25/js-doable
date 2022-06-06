@@ -23,6 +23,8 @@ ul{
   cursor: pointer;
 }
 
+.js-new-task-form,
+.js-signup-form,
 .js-login-form{
   padding: 1rem;
   display: flex;
@@ -45,17 +47,25 @@ ul{
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  text-align: left;
 }
 
 label{
   font-weight: 400;
 }
 
+.input label{
+  text-align: left;
+  padding: 0 15px;
+}
+
+.js-login-link,
 .js-signup-link{
   text-decoration: none;
   color: black;
 }
 
+.login-link-container,
 .signup-link-container{
   text-align: center;
 }
@@ -65,7 +75,7 @@ label{
   align-items: center;
   justify-content: space-evenly;
   background-color: #E5E7EB;
-  padding: 7px 0;
+  padding: 10px 0;
 }
 
 .logout{
@@ -87,7 +97,6 @@ label{
   padding: 0.25rem;
 }
 
-
 .js-sortBy{
   display: flex;
   margin-left: 47px;
@@ -101,6 +110,7 @@ label{
   align-items: center;
   gap: 1rem;
 }
+
 .js-showBy label{
   font-size: small;
 }
@@ -136,4 +146,38 @@ input[type="checkbox"]{
 .js-important-button{
   width: 1rem;
   height: 1rem;
+}
+
+.input__container{
+  padding: 0 14px;
+}
+
+.createTask-button-container,
+.signup-button-container,
+.login-button-container{
+  display: flex;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.js-new-task-submit,
+.js-signup-button,
+.js-login-button{
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid black;
+  padding: 0.25rem 0;
+  background-color: #EC4899;
+  color: white;
+}
+
+.signup-title,
+.login-title{
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.signup-title h1,
+.login-title h1{
+  margin: 0;
 }

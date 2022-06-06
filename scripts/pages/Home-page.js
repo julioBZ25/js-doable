@@ -4,6 +4,7 @@ import LoginPage from "./Login-page.js";
 import STORE from "../store.js";
 import { logout } from "../services/auth-services.js";
 import {createTask, updateTask} from "../services/task-service.js"
+import { Header } from "./header.js";
 
 const CHECKBOX_VALUES = {
   pending: false,
@@ -56,16 +57,7 @@ const HomePage = (function() {
     const listTasks = STORE.filtered.length ? STORE.filtered : STORE.tasks
     const { createError } = createForm.state
     return `
-      <header class= "navbar">
-        <div class= "logo">
-          <img src="./assets/img/doable.png" alt="logo">
-        </div>
-        <div class="logout">
-          <a class="js-logout">
-            <img src="./assets/img/Icon.png" alt="logout">
-          </a>
-        </div>
-      </header>
+      ${Header}
       <section class="sort-section">
         <p class="title-sort">Sort</p>
         <div class="js-sortBy">
@@ -98,7 +90,7 @@ const HomePage = (function() {
       <section class="newTasks-container">
         <form class="js-new-task-form">
           ${input({
-            label: "title",
+            label: "Title",
             id: "title",
             type: "title",
             placeholder: "What things you don't need to forget?",
@@ -112,7 +104,9 @@ const HomePage = (function() {
           ${createError ? 
             `<p>${createError}</p>`: ''
           }
-          <button class="js-new-task-submit">Create Task</button>
+          <div class="createTask-button-container">
+            <button class="js-new-task-submit">Create Task</button>
+          </div>
         </form>
       </section>
       </section>

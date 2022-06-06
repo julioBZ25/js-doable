@@ -8,8 +8,10 @@ function render() {
   const { signUpError } = signUpPage.state;
   return `
       <section class="container">
-        <h1 class="heading heading--lg text-center mb-4">Sign Up</h1>
-        <form class="flex flex-column gap-4 mb-4 js-signup-form">
+        <div class="signup-title">
+          <h1>Sign Up</h1>
+        </div>
+          <form class="flex flex-column gap-4 mb-4 js-signup-form">
           ${input({
             label: "email",
             id: "email",
@@ -27,9 +29,13 @@ function render() {
           ${signUpError ? 
             `<p class="text-center error-300">${signUpError}</p>`: ''
           }
-          <button class="button button--primary">SignUp</button>
+          <div class="signup-button-container">
+            <button class="js-signup-button">SignUp</button>
+          </div>  
         </form>
-        <a href="#" class="block text-center js-login-link">login</a>
+        <div class="login-link-container">
+          <a href="#" class="block text-center js-login-link">login</a>
+        </div>
       </section>
   `
 }
